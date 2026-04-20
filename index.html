@@ -587,8 +587,7 @@ function canRead(ch){
   const ist=getIST(),d=ist.getDate(),m=ist.getMonth()+1,h=ist.getHours();
   if(ch.h===24)return(m===4&&d===22&&h===0)||(m===4&&d>22)||m>4;
   if((m===4&&d>21)||m>4)return true;
-  if (m===4&&d===21) return ch.h===0||h>=ch.h;
-  return False;
+  
 }
 function fmtH(h){if(h===0||h===24)return'12:00 AM';if(h===12)return'12:00 PM';return h>12?`${h-12}:00 PM`:`${h}:00 AM`;}
 
