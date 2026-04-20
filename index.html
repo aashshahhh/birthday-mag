@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Summer She Turned 21 — Pushti</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700;900&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:      #4A7FA8;
+  --blue2:     #2E6090;
+  --blue3:     #6B9DC0;
+  --blue-pale: #B8D4E8;
+  --blue-bg:   #EAF2F8;
+  --pink:      #D4607A;
+  --pink2:     #E8849A;
+  --pink3:     #BC4060;
+  --pink-pale: #F2C4CE;
+  --pink-bg:   #FBF0F3;
+  --beige:     #F5EDD8;
+  --beige2:    #EDE0C4;
+  --beige3:    #FAF7F0;
+  --sand:      #D4B896;
+  --sand2:     #C0A07A;
+  --cream:     #FDFAF4;
+  --yellow:    #E8C840;
+  --yellow2:   #D4A820;
+  --gold-shine:#F5D860;
+  --deep:      #1A2A3A;
+  --text:      #2A2018;
+  --muted:     #7A8898;
+  --muted2:    #9A7A6A;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--beige3); font-family:'Lato',sans-serif; color:var(--text); overflow-x:hidden; }
+
+@keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+@keyframes sparkle { 0%,100%{opacity:.35;transform:scale(.8) rotate(0deg)} 50%{opacity:1;transform:scale(1.2) rotate(180deg)} }
+@keyframes floatBow { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-7px) rotate(1deg)} }
+@keyframes floatBowR { 0%,100%{transform:scaleX(-1) translateY(0) rotate(-1deg)} 50%{transform:scaleX(-1) translateY(-7px) rotate(1deg)} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+
+.shimmer-text {
+  background:linear-gradient(90deg,var(--yellow2) 0%,var(--gold-shine) 30%,#fff8cc 50%,var(--gold-shine) 70%,var(--yellow2) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 3s linear infinite;
+}
+
+/* ── GINGHAM ── */
+.gingham {
+  background-color:var(--blue-pale);
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 16px,rgba(46,96,144,0.28) 16px,rgba(46,96,144,0.28) 17px),
+    repeating-linear-gradient(90deg,transparent,transparent 16px,rgba(46,96,144,0.28) 16px,rgba(46,96,144,0.28) 17px);
+}
+
+/* ── STATUS ── */
+#statusBar { background:var(--blue2); color:var(--blue-pale); text-align:center; padding:9px; font-size:10px; letter-spacing:3px; text-transform:uppercase; font-weight:700; }
+
+/* ══════════════════ COVER ══════════════════ */
+#cover { min-height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+
+.cover-top { height:56px; flex-shrink:0; position:relative; z-index:8; display:flex; align-items:center; justify-content:space-between; padding:0 2rem; }
+.cover-top span { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--blue2); font-weight:700; }
+
+.cover-hero {
+  flex:1; position:relative; overflow:hidden;
+  display:flex; align-items:flex-end; min-height:72vh;
+  background:linear-gradient(160deg, var(--blue2) 0%, var(--blue) 35%, var(--pink3) 70%, #8B2040 100%);
+}
+.cover-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 15%; filter:sepia(5%) contrast(1.08) brightness(0.88); }
+.cover-overlay {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to top, rgba(26,42,58,0.92) 0%, rgba(26,42,58,0.55) 38%, rgba(26,42,58,0.1) 72%, transparent 100%),
+    linear-gradient(135deg, rgba(74,127,168,0.15) 0%, transparent 50%, rgba(212,96,122,0.15) 100%);
+}
+.cover-shimmer {
+  position:absolute; inset:0; pointer-events:none; z-index:2;
+  background:linear-gradient(90deg,transparent 0%,rgba(245,216,96,.06) 40%,rgba(255,255,220,.1) 50%,rgba(245,216,96,.06) 60%,transparent 100%);
+  background-size:200% auto;
+  animation:shimmer 5s linear infinite;
+}
+
+/* frame */
+.cover-frame { position:absolute; inset:12px; border:2px solid rgba(184,212,232,0.4); pointer-events:none; z-index:9; }
+.cover-frame::after { content:''; position:absolute; inset:5px; border:1px solid rgba(242,196,206,0.25); }
+
+/* sparkles */
+.sp { position:absolute; z-index:6; pointer-events:none; font-size:var(--sz,14px); color:var(--gold-shine); opacity:.5; animation:sparkle var(--dur,2.5s) ease-in-out infinite; animation-delay:var(--dl,0s); }
+.sp1 { top:18%; right:10%; --sz:20px; --dl:0s; --dur:2.8s; }
+.sp2 { top:30%; left:7%;  --sz:14px; --dl:.7s; --dur:2.2s; }
+.sp3 { top:52%; right:20%;--sz:11px; --dl:1.3s;--dur:3s; }
+.sp4 { top:10%; left:28%; --sz:16px; --dl:.4s; --dur:2.5s; }
+.sp5 { top:65%; left:15%; --sz:12px; --dl:1.8s; --dur:2s; }
+
+/* cover text */
+.cv-text { position:relative; z-index:7; padding:2rem 2.5rem 2.5rem; width:100%; }
+.cv-vol { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--blue-pale); margin-bottom:.5rem; font-weight:700; }
+.cv-tag {
+  display:inline-block;
+  background:rgba(212,96,122,0.25);
+  border:1px solid rgba(242,196,206,0.5);
+  border-radius:20px;
+  padding:4px 14px;
+  font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--pink-pale);
+  margin-bottom:.8rem;
+}
+.cv-name { font-family:'Playfair Display',serif; font-size:clamp(4rem,16vw,8.5rem); line-height:.86; font-weight:900; letter-spacing:3px; margin-bottom:.3rem; }
+.cv-glow-tag {
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:1.2rem;
+}
+.cv-glow-main { font-family:'Dancing Script',cursive; font-size:clamp(1.2rem,3.5vw,1.8rem); color:var(--pink2); font-weight:700; line-height:1.2; }
+.cv-glow-note { font-size:10px; color:rgba(255,255,255,.45); font-style:italic; letter-spacing:.5px; flex:1; }
+.cv-divider { display:flex; align-items:center; gap:10px; margin-bottom:1.4rem; }
+.cv-divider-line { flex:1; height:1px; background:rgba(184,212,232,0.3); }
+.cv-diamond { width:7px; height:7px; background:var(--blue-pale); transform:rotate(45deg); flex-shrink:0; }
+.cv-bullets { display:flex; flex-direction:column; gap:5px; margin-bottom:1.8rem; }
+.cv-bullet { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(245,237,216,.52); display:flex; align-items:center; gap:8px; }
+.cv-bullet::before { content:''; width:16px; height:1px; background:var(--pink2); flex-shrink:0; }
+.cv-bottom { border-top:1px solid rgba(184,212,232,0.2); padding-top:.9rem; display:flex; justify-content:space-between; align-items:flex-end; }
+.cv-feat-lbl { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--pink2); margin-bottom:3px; }
+.cv-feat-name { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,4vw,2rem); color:#fff; line-height:1; font-weight:700; }
+.cv-feat-sub { font-size:9px; letter-spacing:1px; color:rgba(255,255,255,.35); margin-top:3px; text-transform:uppercase; }
+.cv-badge { text-align:right; font-size:9px; letter-spacing:1px; color:rgba(255,255,255,.28); text-transform:uppercase; line-height:1.7; }
+
+.cover-bottom { height:44px; flex-shrink:0; position:relative; z-index:8; display:flex; align-items:center; justify-content:center; }
+.cover-bottom span { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--blue2); font-weight:700; }
+
+/* BIG BOWS */
+.bow-left  { position:absolute; top:52px; left:14px;  z-index:10; width:115px; animation:floatBow  4s ease-in-out infinite; }
+.bow-right { position:absolute; top:52px; right:14px; z-index:10; width:115px; animation:floatBowR 4s ease-in-out infinite; animation-delay:.9s; transform:scaleX(-1); }
+
+/* ══════════════════ TOC ══════════════════ */
+#toc { max-width:980px; margin:0 auto; padding:5rem 1.5rem; }
+.toc-head { text-align:center; margin-bottom:3.5rem; }
+.toc-bow-wrap { display:flex; justify-content:center; margin-bottom:1rem; }
+.toc-eye { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:.6rem; }
+.toc-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3.4rem); color:var(--blue2); line-height:1; font-weight:700; }
+.toc-title em { font-style:italic; color:var(--pink3); }
+.toc-sub { font-size:11px; color:var(--muted); letter-spacing:1px; margin-top:.5rem; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(262px,1fr)); gap:14px; }
+.cc { border-radius:12px; overflow:hidden; background:var(--cream); border:1.5px solid rgba(74,127,168,0.15); transition:transform .2s,box-shadow .2s; }
+.cc.ok { cursor:pointer; }
+.cc.ok:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(74,127,168,0.2); }
+.cc.locked { opacity:.38; cursor:not-allowed; }
+.cc-top { height:6px; }
+.cc-body { padding:1.2rem 1.2rem .85rem; }
+.cc-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+.cc-n { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
+.cc-t { font-size:11px; font-weight:700; color:var(--blue2); }
+.cc-title { font-family:'Playfair Display',serif; font-size:1.18rem; line-height:1.2; color:var(--blue2); margin-bottom:.32rem; font-weight:700; }
+.cc-deck { font-size:11px; color:var(--muted2); font-style:italic; line-height:1.4; }
+.cc-foot { padding:.58rem 1.2rem; border-top:1px solid rgba(74,127,168,0.1); display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.cc-read { color:var(--pink3); font-weight:700; }
+
+/* ══════════════════ CHAPTER PAGES ══════════════════ */
+.cpage { display:none; min-height:100vh; animation:fadeIn .4s ease; }
+.cpage.active { display:block; }
+
+.cbar { height:46px; display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; background:var(--cream); border-bottom:2px solid var(--blue-pale); position:sticky; top:0; z-index:100; }
+.cbar-back { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); background:none; border:none; cursor:pointer; }
+.cbar-back:hover { color:var(--blue2); }
+.cbar-mid { font-family:'Dancing Script',cursive; font-size:16px; color:var(--blue2); }
+.cbar-n { font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+
+.ch { max-width:720px; margin:0 auto; padding:2.5rem 1.5rem 1.75rem; border-bottom:2.5px solid var(--blue2); }
+.ch-meta { display:flex; justify-content:space-between; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+.ch-bow-wrap { margin-bottom:1rem; }
+.ch-hl { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.5vw,3.4rem); line-height:1.02; color:var(--blue2); font-weight:700; margin-bottom:.55rem; }
+.ch-hl em { font-style:italic; color:var(--pink3); }
+.ch-dk { font-family:'Playfair Display',serif; font-style:italic; font-size:.98rem; color:var(--muted2); line-height:1.55; padding-bottom:.8rem; border-bottom:1px solid rgba(74,127,168,0.15); }
+.ch-by { padding-top:.55rem; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+.ch-by span { color:var(--pink3); font-weight:700; }
+
+.cbody { max-width:680px; margin:0 auto; padding:2.5rem 1.5rem 5rem; font-size:1.04rem; line-height:1.88; color:var(--text); }
+.cbody p { margin-bottom:1.25rem; }
+
+.dropcap::first-letter { font-family:'Playfair Display',serif; font-size:4.5rem; color:var(--pink3); float:left; line-height:.72; margin:.12em .12em 0 0; font-weight:900; }
+
+.pq { border-left:4px solid var(--pink); padding:1rem 1.5rem; margin:2rem 0; background:rgba(212,96,122,0.07); border-radius:0 10px 10px 0; }
+.pq p { font-family:'Playfair Display',serif; font-size:1.38rem; font-style:italic; color:var(--blue2); margin:0; line-height:1.38; }
+.pq .attr { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--pink3); margin-top:.45rem; }
+
+.nb { background:var(--blue2); border-radius:10px; padding:1.25rem 1.5rem; margin:2rem 0; }
+.nb p { margin:0; color:var(--blue-pale); line-height:1.7; }
+.sb { background:var(--blue-bg); border-left:4px solid var(--blue3); border-radius:0 10px 10px 0; padding:1.1rem 1.4rem; margin:2rem 0; }
+.sb p { margin:0; color:var(--blue2); font-style:italic; }
+.pb { background:var(--pink-bg); border-left:4px solid var(--pink2); border-radius:0 10px 10px 0; padding:1.1rem 1.4rem; margin:2rem 0; }
+.pb p { margin:0; color:var(--pink3); font-style:italic; }
+.gb { background:rgba(232,200,64,0.14); border:1.5px solid rgba(212,168,32,0.4); border-radius:10px; padding:1.1rem 1.4rem; margin:2rem 0; }
+.gb p { margin:0; color:var(--blue2); }
+
+.shimmer-box { position:relative; overflow:hidden; background:linear-gradient(135deg,var(--blue2) 0%,var(--pink3) 100%); border-radius:12px; padding:1.5rem; margin:2rem 0; }
+.shimmer-box::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,248,200,.15) 50%,transparent); background-size:200% auto; animation:shimmer 2.5s linear infinite; }
+.shimmer-box > * { position:relative; z-index:1; }
+.shimmer-box p { color:var(--beige); margin:0; line-height:1.7; }
+
+.tl-item { display:flex; gap:1.2rem; padding-bottom:1.35rem; border-bottom:1px solid rgba(74,127,168,0.1); margin-bottom:1.35rem; }
+.tl-yr { font-family:'Playfair Display',serif; font-size:1rem; color:var(--pink3); min-width:65px; line-height:1.4; font-weight:700; }
+.tl-tx { font-size:.95rem; line-height:1.65; }
+
+.facts { list-style:none; margin:1.5rem 0; }
+.fi { display:flex; gap:.9rem; padding:.78rem 0; border-bottom:1px solid rgba(74,127,168,0.08); align-items:flex-start; }
+.fn { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--blue2); min-width:30px; line-height:1; font-weight:700; }
+.ft { font-size:.93rem; line-height:1.6; padding-top:3px; }
+
+.tsc { border-radius:14px; padding:1.75rem 1.5rem; margin:1.4rem 0; text-align:center; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--blue2) 0%,var(--blue) 50%,var(--pink3) 100%); }
+.tsc::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(to right,var(--pink),var(--blue-pale),var(--yellow),var(--pink)); background-size:200% auto; animation:shimmer 3s linear infinite; }
+.tsc::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,248,200,.1),transparent); animation:shimmer 2.2s linear infinite; }
+.tsc-inner { position:relative; z-index:1; }
+.tsc-text { font-family:'Playfair Display',serif; font-size:1.45rem; font-style:italic; font-weight:700; margin-bottom:.45rem; line-height:1.2; }
+.tsc-note { font-size:11px; letter-spacing:.5px; color:rgba(184,212,232,0.7); }
+
+.pli { display:flex; gap:1rem; padding:.9rem 0; border-bottom:1px solid rgba(74,127,168,0.1); align-items:flex-start; }
+.pln { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--pink3); min-width:28px; font-weight:700; }
+.pl-info .pls { font-weight:700; font-size:.93rem; color:var(--blue2); }
+.pl-info .plsh { font-size:11px; color:var(--muted2); font-style:italic; }
+.pl-info .plr { font-size:11px; color:var(--text); margin-top:2px; line-height:1.4; }
+
+.pg2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:2rem 0; }
+.pg2 img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:8px; background:var(--blue-bg); display:block; }
+.pf { margin:2rem 0; }
+.pf img { width:100%; border-radius:12px; display:block; background:var(--blue-bg); min-height:200px; }
+.pc { text-align:center; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+
+.doobi-choice { display:flex; gap:1rem; margin:2rem 0; }
+.doobi-btn { flex:1; background:linear-gradient(135deg,var(--blue2),var(--blue)); border:2px solid rgba(212,96,122,0.3); border-radius:14px; padding:1.5rem 1rem; cursor:pointer; text-align:center; transition:transform .2s,box-shadow .2s,border-color .2s; position:relative; overflow:hidden; }
+.doobi-btn::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,248,200,.1),transparent); background-size:200% auto; animation:shimmer 2.5s linear infinite; }
+.doobi-btn:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(74,127,168,.3); border-color:var(--pink2); }
+.doobi-btn img { width:80px; height:80px; object-fit:cover; border-radius:50%; margin:0 auto .65rem; border:2.5px solid var(--pink2); display:block; background:var(--blue-bg); }
+.doobi-btn .db-name { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--blue-pale); font-style:italic; font-weight:700; position:relative; z-index:1; }
+.doobi-btn .db-sub { font-size:10px; color:rgba(184,212,232,.6); letter-spacing:1px; margin-top:3px; position:relative; z-index:1; }
+.doobi-result { display:none; margin:2rem 0; }
+.doobi-result.show { display:block; }
+.doobi-verdict { background:linear-gradient(135deg,var(--blue2),var(--pink3)); border-radius:14px; padding:2rem 1.5rem; text-align:center; position:relative; overflow:hidden; }
+.doobi-verdict::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,248,200,.15),transparent); background-size:200% auto; animation:shimmer 2s linear infinite; }
+.doobi-verdict p { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--beige); font-style:italic; line-height:1.4; margin:0; position:relative; z-index:1; }
+.doobi-verdict .small { font-size:12px; color:rgba(245,237,216,.7); margin-top:.75rem; letter-spacing:1px; position:relative; z-index:1; }
+
+.char-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:2rem 0; }
+.char-card { background:var(--cream); border:1.5px solid rgba(74,127,168,0.15); border-radius:10px; padding:.75rem; text-align:center; }
+.char-card img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:8px; background:var(--blue-bg); margin-bottom:.5rem; display:block; }
+.char-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--blue2); font-style:italic; font-weight:700; }
+.char-note { font-size:10px; color:var(--muted2); margin-top:2px; line-height:1.4; }
+
+.fl { border-radius:16px; padding:3rem 2rem; margin:2rem 0; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--blue2) 0%,var(--blue) 50%,var(--pink3) 100%); }
+.fl::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent,rgba(255,248,200,.12) 50%,transparent); background-size:200% auto; animation:shimmer 3s linear infinite; }
+.fl-in { position:relative; z-index:1; }
+.fl-title { font-family:'Dancing Script',cursive; font-size:2.4rem; margin-bottom:1.35rem; line-height:1.15; font-weight:700; }
+.fl-body { font-size:1.02rem; line-height:1.9; color:rgba(245,237,216,.88); }
+.fl-body p { margin-bottom:1.15rem; }
+.fl-sign { font-family:'Dancing Script',cursive; font-size:1.5rem; color:var(--pink-pale); margin-top:1.75rem; font-weight:700; }
+
+.strike { text-decoration:line-through; opacity:.5; }
+.cnav { max-width:680px; margin:0 auto; padding:1rem 1.5rem 4rem; display:flex; justify-content:space-between; border-top:1px solid rgba(74,127,168,0.12); }
+.cnav-btn { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); background:none; border:none; cursor:pointer; padding:.45rem 0; }
+.cnav-btn:hover { color:var(--blue2); }
+.cnav-btn.next { color:var(--pink3); font-weight:700; }
+
+@media(max-width:480px) { .grid{grid-template-columns:1fr;} .doobi-choice{flex-direction:column;} }
+</style>
+</head>
+<body>
+
+<div id="statusBar">Loading Pushti's Birthday Edition... ✨</div>
+
+<div id="mainView">
+
+  <!-- ══ COVER ══ -->
+  <div id="cover">
+
+    <div class="cover-top gingham">
+      <span>The Birthday Edition ✦ Vol. 21</span>
+      <span>✦ April 21, 2026 ✦ IST</span>
+    </div>
+
+    <!-- RIBBON BOWS — top-left style: wide flat wings, long flowing tails -->
+    <svg class="bow-left" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- left wing — wide flat ribbon folded inward -->
+      <path d="M80 72 C70 65, 50 55, 28 48 C14 43, 2 44, 2 54 C2 62, 14 68, 30 70 C50 73, 68 72, 80 72Z"
+        fill="rgba(242,196,206,0.35)" stroke="#E8849A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- left wing lower fold -->
+      <path d="M80 76 C68 78, 46 82, 24 78 C12 76, 4 70, 6 62"
+        fill="none" stroke="#E8849A" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- left wing inner crease -->
+      <path d="M78 73 C66 70, 46 66, 26 62 C14 59, 5 60, 4 66"
+        fill="none" stroke="#D4607A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+
+      <!-- right wing — wide flat ribbon -->
+      <path d="M80 72 C90 65, 110 55, 132 48 C146 43, 158 44, 158 54 C158 62, 146 68, 130 70 C110 73, 92 72, 80 72Z"
+        fill="rgba(242,196,206,0.35)" stroke="#E8849A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- right wing lower fold -->
+      <path d="M80 76 C92 78, 114 82, 136 78 C148 76, 156 70, 154 62"
+        fill="none" stroke="#E8849A" stroke-width="2.2" stroke-linecap="round"/>
+      <!-- right wing inner crease -->
+      <path d="M82 73 C94 70, 114 66, 134 62 C146 59, 155 60, 156 66"
+        fill="none" stroke="#D4607A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+
+      <!-- knot — small tight wrap -->
+      <path d="M74 68 C74 62, 86 58, 86 68 C86 78, 74 82, 74 76 Z"
+        fill="rgba(242,196,206,0.6)" stroke="#E8849A" stroke-width="2.2"/>
+
+      <!-- LEFT TAIL — long straight ribbon with gentle curve, like reference -->
+      <path d="M74 78 C70 94, 60 118, 48 148 C40 168, 34 186, 36 196"
+        fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M78 78 C74 94, 64 118, 52 148 C44 168, 38 186, 40 196"
+        fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <!-- left tail inner highlight -->
+      <path d="M76 80 C72 96, 62 120, 50 150 C42 170, 36 188, 38 197"
+        fill="none" stroke="#F2C4CE" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+
+      <!-- RIGHT TAIL — long straight with gentle curve -->
+      <path d="M86 78 C90 94, 100 118, 112 148 C120 168, 126 186, 124 196"
+        fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M82 78 C86 94, 96 118, 108 148 C116 168, 122 186, 120 196"
+        fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <!-- right tail inner highlight -->
+      <path d="M84 80 C88 96, 98 120, 110 150 C118 170, 124 188, 122 197"
+        fill="none" stroke="#F2C4CE" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+    </svg>
+
+    <svg class="bow-right" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 72 C70 65, 50 55, 28 48 C14 43, 2 44, 2 54 C2 62, 14 68, 30 70 C50 73, 68 72, 80 72Z" fill="rgba(242,196,206,0.35)" stroke="#E8849A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M80 76 C68 78, 46 82, 24 78 C12 76, 4 70, 6 62" fill="none" stroke="#E8849A" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M78 73 C66 70, 46 66, 26 62 C14 59, 5 60, 4 66" fill="none" stroke="#D4607A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+      <path d="M80 72 C90 65, 110 55, 132 48 C146 43, 158 44, 158 54 C158 62, 146 68, 130 70 C110 73, 92 72, 80 72Z" fill="rgba(242,196,206,0.35)" stroke="#E8849A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M80 76 C92 78, 114 82, 136 78 C148 76, 156 70, 154 62" fill="none" stroke="#E8849A" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M82 73 C94 70, 114 66, 134 62 C146 59, 155 60, 156 66" fill="none" stroke="#D4607A" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+      <path d="M74 68 C74 62, 86 58, 86 68 C86 78, 74 82, 74 76 Z" fill="rgba(242,196,206,0.6)" stroke="#E8849A" stroke-width="2.2"/>
+      <path d="M74 78 C70 94, 60 118, 48 148 C40 168, 34 186, 36 196" fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M78 78 C74 94, 64 118, 52 148 C44 168, 38 186, 40 196" fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M76 80 C72 96, 62 120, 50 150 C42 170, 36 188, 38 197" fill="none" stroke="#F2C4CE" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+      <path d="M86 78 C90 94, 100 118, 112 148 C120 168, 126 186, 124 196" fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M82 78 C86 94, 96 118, 108 148 C116 168, 122 186, 120 196" fill="none" stroke="#E8849A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M84 80 C88 96, 98 120, 110 150 C118 170, 124 188, 122 197" fill="none" stroke="#F2C4CE" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+    </svg>
+
+    <div class="cover-hero">
+      <img class="cover-photo" src="cover.jpg" alt="Pushti" onerror="this.style.opacity='0'">
+      <div class="cover-overlay"></div>
+      <div class="cover-shimmer"></div>
+      <div class="sp sp1">✦</div><div class="sp sp2">✦</div><div class="sp sp3">✦</div><div class="sp sp4">✦</div><div class="sp sp5">✦</div>
+
+      <div class="cv-text">
+        <div class="cv-vol">Volume 21 · April 21, 2026 · IST Edition</div>
+        <div class="cv-tag">✦ The Birthday Edition ✦</div>
+        <div class="cv-name shimmer-text">PUSHTI</div>
+        <div class="cv-glow-tag">
+          <div class="cv-glow-main">The Glow Down Issue 🍇</div>
+          <div class="cv-glow-note">— because the grape costume was genuinely your peak moment and we cannot move on</div>
+        </div>
+        <div class="cv-divider"><div class="cv-divider-line"></div><div class="cv-diamond"></div><div class="cv-divider-line"></div></div>
+        <div class="cv-bullets">
+          <div class="cv-bullet">13 chapters unlocking every 2 hours · IST 🎀</div>
+          <div class="cv-bullet">T-shirts you won't need to steal now 👕</div>
+          <div class="cv-bullet">Doobi behaviour: the full retrospective 🥰</div>
+          <div class="cv-bullet">TMKOC behaviour · documented for science 📋</div>
+        </div>
+        <div class="cv-bottom">
+          <div>
+            <div class="cv-feat-lbl">Featuring</div>
+            <div class="cv-feat-name">Pushti · Puuu · Pillu · Foxy 🦊</div>
+            <div class="cv-feat-sub">21 years of certified iconic chaos</div>
+          </div>
+          <div class="cv-badge">April 21<br>2026<br>Issue 001</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-bottom gingham">
+      <span>✦ Check back every 2 hours · New chapter unlocks · Curated by Aash the Great, ofc obv 👑 ✦</span>
+    </div>
+    <div class="cover-frame"></div>
+  </div>
+
+  <!-- ══ TOC ══ -->
+  <div id="toc">
+    <div class="toc-head">
+      <div class="toc-bow-wrap">
+        <svg width="80" height="100" viewBox="0 0 160 200" fill="none">
+          <path d="M80 72 C70 65,50 55,28 48 C14 43,2 44,2 54 C2 62,14 68,30 70 C50 73,68 72,80 72Z" fill="rgba(212,96,122,0.15)" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M80 76 C68 78,46 82,24 78 C12 76,4 70,6 62" fill="none" stroke="#D4607A" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M80 72 C90 65,110 55,132 48 C146 43,158 44,158 54 C158 62,146 68,130 70 C110 73,92 72,80 72Z" fill="rgba(212,96,122,0.15)" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M80 76 C92 78,114 82,136 78 C148 76,156 70,154 62" fill="none" stroke="#D4607A" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M74 68 C74 62,86 58,86 68 C86 78,74 82,74 76 Z" fill="rgba(212,96,122,0.4)" stroke="#D4607A" stroke-width="2"/>
+          <path d="M74 78 C70 94,60 118,48 148 C40 168,34 186,36 196" fill="none" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M78 78 C74 94,64 118,52 148 C44 168,38 186,40 196" fill="none" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M86 78 C90 94,100 118,112 148 C120 168,126 186,124 196" fill="none" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M82 78 C86 94,96 118,108 148 C116 168,122 186,120 196" fill="none" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="toc-eye">Table of Contents</div>
+      <div class="toc-title">Today's <em>Edition</em></div>
+      <div class="toc-sub">One chapter drops every 2 hours · IST · April 21, 2026 🎀</div>
+    </div>
+    <div class="grid" id="tocGrid"></div>
+  </div>
+</div>
+
+<div id="chaptersContainer"></div>
+
+<script>
+const chapters = [
+  { h:0,  col:'linear-gradient(to right,#2E6090,#4A7FA8)',
+    title:'Happy Birthday, Puuu 🎀', deck:'The issue we\'ve been planning for 21 years — bas trailer hai bhai',
+    body:`<p class="dropcap">Happy birthday puuuuuu pillu foxy ❤️❤️ bhai ka birthday hai aaj 🥳💃🏼💃🏼💃🏼 and that too 21st — omgwow 🤯</p>
+    <div class="pq"><p>"Doobi, ukw I got you gifts — ask me what???? Also you have more surprises to come. Yeh toh bas trailer hai bhai 😎😎"</p></div>
+    <p>Welcome to your birthday magazine — made by Aash the Great, ofc obv 👑 — entirely from scratch, with love, zero sleep, and maximum chaos energy. There are 13 chapters here, one dropping every 2 hours. ☕</p>
+    <p>You are <em>21</em> now. The grape costume era 🍇. The doobi era 🥰. The nakkami huh 🙂‍↔️ era. All documented right here.</p>
+    <div class="nb"><p>📖 <strong>How to use this:</strong> Come back every 2 hours — a new chapter unlocks each time. The final chapter drops at 12am April 22nd IST. Don't skip ahead. Savour it 🥂</p></div>
+    <p style="font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--pink3);">With all my love — Aash the Great, ofc obv 👑 xx 🎀</p>`
+  },
+  { h:2,  col:'linear-gradient(to right,#4A7FA8,#6B9DC0)',
+    title:'In The Beginning 👶', deck:'An origin story. With receipts. Allegedly.',
+    body:`<p class="dropcap">In the beginning, maine tujhe giraya bed se. 🛏️ <strong>ALLEGEDLY.</strong></p>
+    <div class="pq"><p>"But then you have hit me a lot as well — toh uss hisaab se I have to hit you more hainaaaaa?? Obvvv bhai bav maaris tane hu 😂😂"</p></div>
+    <p>The math is simple. The logic is unbeatable. The defence rests. ⚖️</p>
+    <p>Be ready, kapdechor 👗✂️ — HBD lolololooooo 🎂🎉</p>
+    <div class="sb"><p><em>Legal disclaimer: All bed-falling incidents are allegedly alleged. No further comments. My lawyers will be in touch. 🙂‍↔️</em></p></div>
+    <p>📝 [Add your earliest real memory of her here — the funnier the better]</p>`
+  },
+  { h:4,  col:'linear-gradient(to right,#D4607A,#BC4060)',
+    title:'The Greatest Hits 🎤', deck:'Chipya. Dosa smash. Gian era. The grape costume. The full hall of fame.',
+    body:`<p class="dropcap">When we talk about the greatest hits, there is a very specific Hall of Fame that exists inside my head — and Puuu, you are the sole inductee. 🏆</p>
+    <div class="tl-item"><div class="tl-yr">Hit #1 🐛</div><div class="tl-tx"><strong>The Chipya.</strong> A legacy. An icon. Cannot be explained to outsiders. You know what you did. 😂</div></div>
+    <div class="tl-item"><div class="tl-yr">Hit #2 🫓</div><div class="tl-tx"><strong>The Dosa Smash.</strong> World-class. No notes. Deserved a standing ovation, got chaos instead. Correct outcome. 🤣</div></div>
+    <div class="tl-item"><div class="tl-yr">Hit #3 🎵</div><div class="tl-tx"><strong>Singing "Mei Hu Gian."</strong> Yes puuuuu — you ARE Gian. Bully who sings Mei Hu Gian and cries like a foxy 🦊😭 — that is the full character arc right there.</div></div>
+    <div class="tl-item"><div class="tl-yr">Hit #4 🍇</div><div class="tl-tx"><strong>The Grape Costume.</strong> The Glow Down Issue cover story. You truly, genuinely shined brightest in that moment. Peak fashion. Peak Pushti. ✨ We will never recover.</div></div>
+    <div class="gb"><p>🏅 The Chipya · The Dosa · The Gian era · The Grapes 🍇 — this is your legacy, Puuu. Own it fully and with zero shame. 💅</p></div>`
+  },
+  { h:6,  col:'linear-gradient(to right,#2E6090,#4A7FA8)',
+    title:'Good Morning, Legend 😴', deck:'6am. She is definitely still asleep. Absolutely still asleep.',
+    body:`<p class="dropcap">Huhhhh 😤</p>
+    <div class="pq"><p>"Kaise good morning — kumbhkarni toh abhi bhi sooo rahi hogi 😴😴 shiiiii very bad — uthhhhhh bhai jaldi jaldiiiii gandu!! 🛏️⏰"</p></div>
+    <p>It is 6am. This chapter has unlocked itself. You are professionally, committedly, expertly asleep. 😴</p>
+    <div class="sb"><p><em>Historical record: Pushti has never willingly woken before 10am. Today will be no different. This is a character trait. We respect it. 🙂‍↔️</em></p></div>
+    <p>Jab bhi uthna ho — chai bana ☕, ye chapter padh, and feel kar ki aaj toh tu legend hai 👑 Happy Birthday, kumbhkarni. 🎂</p>`
+  },
+  { h:8,  col:'linear-gradient(to right,#D4B896,#C0A07A)',
+    title:'21 Things We Love About Pillu 💛', deck:'Too difficult. But fine. Whatever. Scroll for the surprise.',
+    body:`<p class="dropcap">Ok so. 21 things. About Puuu. This is extremely difficult but fine, whatever, here is the attempt 🙂‍↔️</p>
+    <ul class="facts">
+      <li class="fi"><span class="fn">P</span><span class="ft"><strong>P: Pretty annoying</strong> 🙃 (with love obviously obviously)</span></li>
+      <li class="fi"><span class="fn">U</span><span class="ft"><strong>U: Useful for assignments</strong> 📚 (your one redeeming quality ngl)</span></li>
+      <li class="fi"><span class="fn">S</span><span class="ft"><strong>S: Soooo irritating like omgggggg</strong> 😭 <em>*Janice laugh* AAHAHAAAA*</em></span></li>
+      <li class="fi"><span class="fn">H</span><span class="ft"><strong>H: Hatttttt</strong> 🫸 (you know exactly what this means)</span></li>
+      <li class="fi"><span class="fn">T</span><span class="ft"><strong>T:</strong> t... t... 🤔 ...can't seem to think of any. Oooooops 💅</span></li>
+      <li class="fi"><span class="fn">I</span><span class="ft"><strong>I: I love you despite ALL of that, Puuuuu</strong> ❤️❤️❤️</span></li>
+    </ul>
+    <div class="pq"><p>"Your ____ — sikkeeee. Fill in the blanks cause there's none. &lt;&lt;&lt;scroll&gt;&gt;&gt;"</p></div>
+    <p>Ok fine. <em>Fine.</em> Since it's your birthday and I'm feeling dangerously generous 😤:</p>
+    <ul class="facts">
+      <li class="fi"><span class="fn">✨</span><span class="ft">You are genuinely the funniest person I know and you don't even try 😭</span></li>
+      <li class="fi"><span class="fn">🦊</span><span class="ft">Your foxy energy is completely unmatched. Certified foxy behaviour.</span></li>
+      <li class="fi"><span class="fn">💪</span><span class="ft">You show up for people even when you're tired. Always.</span></li>
+      <li class="fi"><span class="fn">🥰</span><span class="ft">You are the biggest doobi AND the most loveable person simultaneously. How. Explain. 🥰</span></li>
+      <li class="fi"><span class="fn">👑</span><span class="ft">I love you, despite everything above and everything I will say in future chapters. 21 years of evidence. ❤️</span></li>
+    </ul>
+    <div class="shimmer-box"><p>🎂 Happy 21st, Puuu. You are so deeply, annoyingly, wonderfully you. Don't change. (Except maybe wake up earlier sometimes.) ✨😴</p></div>`
+  },
+  { h:10, col:'linear-gradient(to right,#D4607A,#4A7FA8)',
+    title:'The T-Shirt Reveal 👕', deck:'T-shirts you won\'t need to steal now — you\'re welcome 🙏',
+    body:`<p class="dropcap">Bata diya na share tshirts 👕 — ab please <strong>don't steal my clothes Puuuuu</strong> 😭😭 you have your own now!! This was the whole point!!</p>
+    <div class="tsc"><div class="tsc-inner"><div class="tsc-text shimmer-text">👕 "Proud Owner of One Brain Cell"</div><div class="tsc-note">Factually accurate. Deeply fashionable. No further notes. 🧠</div></div></div>
+    <div class="tsc"><div class="tsc-inner"><div class="tsc-text shimmer-text">👕 "I Have 3 Dollars"</div><div class="tsc-note">A lifestyle. A mood. Your autobiography in four words. 💸</div></div></div>
+    <div class="tsc"><div class="tsc-inner"><div class="tsc-text shimmer-text">👕 "I Love Overreacting"</div><div class="tsc-note">She didn't choose this trait. This trait chose her. We respect it. 🎭</div></div></div>
+    <div class="tsc"><div class="tsc-inner"><div class="tsc-text shimmer-text">👕 "Due To Not Wanting To, I Will Not"</div><div class="tsc-note">Peak nakkami huh 🙂‍↔️ energy. Certified TMKOC behaviour. Highest compliment. 🏆</div></div></div>
+    <div class="gb"><p>💌 These are yours now. YOURS. Do not return them. Do not borrow my hoodies in revenge. The clothes theft era is OVER. 🙏</p></div>`
+  },
+  { h:12, col:'linear-gradient(to right,#2E6090,#D4607A)',
+    title:'The WhatsApp Archives 📱', deck:'Selected exhibits. No context. The context makes it worse.',
+    body:`<p class="dropcap">In the interest of journalism, I present the following evidence from our WhatsApp history. 📱 These are real. They happened. There is no explaining them.</p>
+    <div class="pf"><img src="whatsapp1.png" alt="" onerror="this.style.display='none'"><div class="pc">Exhibit A — the prosecution rests 🔨</div></div>
+    <div class="pf"><img src="whatsapp2.png" alt="" onerror="this.style.display='none'"><div class="pc">Exhibit B — no further questions 🫡</div></div>
+    <div class="pf"><img src="whatsapp3.png" alt="" onerror="this.style.display='none'"><div class="pc">Exhibit C — her finest hour 🏆</div></div>
+    <div class="pf"><img src="whatsapp4.png" alt="" onerror="this.style.display='none'"><div class="pc">Exhibit D — this deserves a frame 🖼️</div></div>
+    <div class="sb"><p><em>📋 Upload your screenshots as whatsapp1.png, whatsapp2.png etc. to GitHub 🎀</em></p></div>`
+  },
+  { h:14, col:'linear-gradient(to right,#4A7FA8,#6B9DC0)',
+    title:'The Photo Essay 📸', deck:'Visual evidence that we have, in fact, lived. Thoroughly.',
+    body:`<p class="dropcap">Sometimes words are not enough. Here is photographic proof of Pushti — across years, locations, and various states of certified doobi behaviour. 📸</p>
+    <div class="pg2">
+      <img src="pic1.jpg" alt="" onerror="this.style.background='var(--blue-bg)'">
+      <img src="pic2.jpg" alt="" onerror="this.style.background='var(--pink-bg)'">
+      <img src="pic3.jpg" alt="" onerror="this.style.background='var(--beige2)'">
+      <img src="pic4.jpg" alt="" onerror="this.style.background='var(--blue-bg)'">
+    </div>
+    <div class="pc">📝 [Caption here — a theme, a year, a memory]</div>
+    <div class="pf"><img src="fave.jpg" alt="" onerror="this.style.background='var(--blue-bg)';this.style.minHeight='220px'"><div class="pc">[Your favourite photo of her — and exactly why 🥰]</div></div>
+    <p>💫 [Upload as pic1.jpg, pic2.jpg, fave.jpg etc. to the GitHub repo]</p>`
+  },
+  { h:16, col:'linear-gradient(to right,#D4607A,#E8849A)',
+    title:'Such A Doobi You Are 🥰', deck:'TMKOC behaviour. Daya vs Dobby. Choose your fighter.',
+    body:`<p class="dropcap">Such a doobi you are 🥰 — and I mean that in every possible beautiful chaotic way. Let me explain.</p>
+    <div class="pq"><p>"Such a doobi you are 🥰"</p><div class="attr">— Me. Daily. Without fail. Forever. And also: "Nakkami huh 🙂‍↔️"</div></div>
+    <p>There is a very specific Pushti energy that lives somewhere between two iconic figures. Today you must look deep within yourself and choose. 🔮</p>
+    <div class="doobi-choice" id="doobiChoice">
+      <button class="doobi-btn" onclick="chooseDoobi('daya')">
+        <img src="daya.jpg" alt="Daya" onerror="this.style.background='var(--blue-pale)'">
+        <div class="db-name">Daya Ben 🏠</div>
+        <div class="db-sub">TMKOC · Hai Ram! · certified doobi</div>
+      </button>
+      <button class="doobi-btn" onclick="chooseDoobi('dobby')">
+        <img src="dobby.jpg" alt="Dobby" onerror="this.style.background='var(--blue2)'">
+        <div class="db-name">Dobby 🧦</div>
+        <div class="db-sub">Harry Potter · big eyes · pure heart</div>
+      </button>
+    </div>
+    <div class="doobi-result" id="doobiResult">
+      <div class="doobi-verdict">
+        <p id="doobiVerdict">You are... calculating 🔮</p>
+        <div class="small" id="doobiSub"></div>
+      </div>
+      <p style="text-align:center;margin-top:1rem;">
+        <button onclick="resetDoobi()" style="background:none;border:1.5px solid var(--pink3);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--pink3);">Try again 🔄</button>
+      </p>
+    </div>
+    <div class="shimmer-box" style="margin-top:2rem;"><p>🥰 The real answer: you are BOTH. Daya's TMKOC chaos energy + Dobby's loyal pure heart + Pushti's own certified doobi personality. Hawwww. HAWWWW. 😭❤️</p></div>
+    <p>📝 [Add your real doobi/nakkami stories here — specific incidents, named moments, full receipts 📋]</p>`
+  },
+  { h:18, col:'linear-gradient(to right,#2E6090,#4A7FA8)',
+    title:'Her Playlist 🎵', deck:'The soundtrack to 21 years of iconic Pushti moments',
+    body:`<p class="dropcap">Every iconic person has a soundtrack. Here is Pushti's — the songs somehow always playing in the background of her most doobi moments. 🎵</p>
+    <div class="pli"><div class="pln">01</div><div class="pl-info"><div class="pls">I'll Be There For You — The Rembrandts ☕</div><div class="plsh"><span class="strike">Friends</span> obviously obviously 🛋️</div><div class="plr">She IS Central Perk. She IS the couch. This is not a question. 🥰</div></div></div>
+    <div class="pli"><div class="pln">02</div><div class="pl-info"><div class="pls">Gossip Girl Theme 💌</div><div class="plsh"><span class="strike">Gossip Girl</span> — Blair energy fully absorbed 👑</div><div class="plr">Rewatched multiple times. Zero shame. Correct behaviour. XOXO.</div></div></div>
+    <div class="pli"><div class="pln">03</div><div class="pl-info"><div class="pls">Mei Hu Gian 🎶</div><div class="plsh">Doraemon · Hall of Fame inductee</div><div class="plr">You sang this. With feeling. Full commit. We will never forget. Never. 🎤😭</div></div></div>
+    <div class="pli"><div class="pln">04</div><div class="pl-info"><div class="pls">[Add a song she actually loves] 🎵</div><div class="plsh">[Artist]</div><div class="plr">[Why this song is very her]</div></div></div>
+    <div class="pli"><div class="pln">05</div><div class="pl-info"><div class="pls">[One more — peak Pushti energy] 🎶</div><div class="plsh">[Artist]</div><div class="plr">[The reason]</div></div></div>
+    <div class="pb"><p><em>🎵 Friends + Gossip Girl + Mei Hu Gian is the most Pushti combination of media that has ever existed. Period. 🥰</em></p></div>`
+  },
+  { h:20, col:'linear-gradient(to right,#D4607A,#2E6090)',
+    title:'If Pushti Were A Character 🎬', deck:'Tu sache me ek character aj che. Vaidi toh su kav hu. But I will anyway.',
+    body:`<p class="dropcap">Tu sache me ek character aj che ne vaidi toh su kav hu 😂 — but I most of the times have very specific opinions. So. Here we go. 🎬</p>
+    <div class="char-grid">
+      <div class="char-card"><img src="squidward.jpg" alt="Squidward" onerror="this.style.background='var(--blue-bg)';this.style.minHeight='100px'"><div class="char-name">Squidward 🦑</div><div class="char-note">Most of the times — very strict, very serious, very done with everyone's nonsense 😂</div></div>
+      <div class="char-card"><img src="gogi.jpg" alt="Gogi TMKOC" onerror="this.style.background='var(--beige2)';this.style.minHeight='100px'"><div class="char-name">Gogi 🏏</div><div class="char-note">TMKOC energy — the chaos, the doobi behaviour, certified nakkami 🥰</div></div>
+      <div class="char-card"><img src="ron.jpg" alt="Ron Weasley" onerror="this.style.background='var(--pink-bg)';this.style.minHeight='100px'"><div class="char-name">Ron Weasley 🧙</div><div class="char-note">samajhna hi nahi kuch bhi 😭 — still shows up. always. ❤️</div></div>
+      <div class="char-card"><img src="blair.jpg" alt="Blair Waldorf" onerror="this.style.background='var(--blue-pale)';this.style.minHeight='100px'"><div class="char-name">Blair Waldorf 👑</div><div class="char-note">The crown, the drama, the standards. When she wants to be — she IS Blair. 💅</div></div>
+    </div>
+    <div class="pq"><p>"But most of the times you are Puuuuu — sista from the same mims. 💕 And that is actually the best character of all."</p><div class="attr">— Aash the Great, ofc obv 👑</div></div>
+    <div class="pg2">
+      <img src="her1.jpg" alt="" onerror="this.style.background='var(--blue-bg)'">
+      <img src="her2.jpg" alt="" onerror="this.style.background='var(--pink-bg)'">
+    </div>
+    <div class="pc">Puuu · sista from the same mims · the only character that matters 🦊❤️</div>`
+  },
+  { h:22, col:'linear-gradient(to right,#2E6090,#D4607A)',
+    title:"Editor's Letter ✍️", deck:"From the desk of Aash the Great, ofc obv 👑",
+    body:`<p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">From the desk of Aash the Great, ofc obv 👑 · Editor-in-Chief · April 21, 2026</p>
+    <p class="dropcap">[This is the big one — write Pushti your real letter here. Who she is to you, what this year meant, what you love most about her. Write it like she'll keep it forever. 💌]</p>
+    <p>[Second paragraph — something specific from this past year. A moment that showed you who she really is. 🥹]</p>
+    <div class="pq"><p>[A line that sums up everything — make it yours. Something she'll screenshot. 📸]</p><div class="attr">— Something you actually believe</div></div>
+    <p>[Third paragraph — about being sisters. What it means to have her. 🌍]</p>
+    <p>[Final paragraph — end on doobi energy. Nakkami callback. Something that sounds like YOU. She should laugh through the tears. 😭❤️]</p>
+    <p style="font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--pink3);margin-top:2rem;">All my love, always — Aash the Great, ofc obv 👑 xx 🎀</p>`
+  },
+  { h:24, col:'linear-gradient(to right,#1A2A3A,#2E6090)',
+    title:'The Final Chapter 🎀', deck:'Vol. 21 — The Last Page · Unlocks 12am April 22nd IST',
+    body:`<div class="fl"><div class="fl-in">
+      <div class="fl-title shimmer-text">Bas hogaya haa 🎉</div>
+      <div class="fl-body">
+        <p>Ab birthday next year aana 😂 chapli byeeeee bhaakkkkkkkk!! 👋👋👋</p>
+        <p>…ok fine. Come back also before that. Teri hi zaroorat hai yaar. 🥹❤️</p>
+        <p>Happy 21st, Puuu. Pillu. Foxy. Doobi. Legend. 🦊🎀👑</p>
+        <p>Such a doobi you are 🥰 — the biggest, the best, the most Pushti of all the Pushtis. Volume 22 is already in development. 😎✨</p>
+      </div>
+      <div class="fl-sign">With everything — Aash the Great, ofc obv 👑 xx 🎀</div>
+    </div></div>
+    <p style="text-align:center;color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-top:2rem;">End of Volume 21 · April 21, 2026 · See you in Vol. 22 🥂</p>
+    <div class="gingham" style="height:36px;margin-top:1.5rem;border-radius:8px;opacity:0.6;"></div>`
+  }
+];
+
+function getIST(){const now=new Date();return new Date(now.getTime()+now.getTimezoneOffset()*60000+5.5*3600000);}
+function canRead(ch){
+  const ist=getIST(),d=ist.getDate(),m=ist.getMonth()+1,h=ist.getHours();
+  if(ch.h===24)return(m===4&&d===22&&h===0)||(m===4&&d>22)||m>4;
+  if((m===4&&d>21)||m>4)return true;
+  if(m===4&&d===21)return ch.h===0||h>=ch.h;
+  return false;
+}
+function fmtH(h){if(h===0||h===24)return'12:00 AM';if(h===12)return'12:00 PM';return h>12?`${h-12}:00 PM`:`${h}:00 AM`;}
+
+function chooseDoobi(type){
+  document.getElementById('doobiResult').classList.add('show');
+  if(type==='daya'){document.getElementById('doobiVerdict').textContent='🏠 You are Daya Ben!! Hai Ram!! 😭';document.getElementById('doobiSub').textContent='TMKOC doobi energy confirmed. Hawwww. 🥰';}
+  else{document.getElementById('doobiVerdict').textContent='🧦 You are Dobby!! Loyal! Pure! Chaotic!';document.getElementById('doobiSub').textContent='Big eyes, bigger heart, absolute doobi vibes. 🥹';}
+  setTimeout(()=>{document.getElementById('doobiVerdict').textContent='🥰 Wait — actually you are BOTH. Hawwww. HAWWWW. HAWWWWW.';document.getElementById('doobiSub').textContent='The doobi-meter has fully exploded. Such a doobi you are. 😭❤️';},2200);
+}
+function resetDoobi(){document.getElementById('doobiResult').classList.remove('show');}
+
+function bowHTML(){return`<svg width="52" height="65" viewBox="0 0 160 200" fill="none">
+  <path d="M80 72 C70 65,50 55,28 48 C14 43,2 44,2 54 C2 62,14 68,30 70 C50 73,68 72,80 72Z" fill="rgba(212,96,122,0.12)" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80 76 C68 78,46 82,24 78 C12 76,4 70,6 62" fill="none" stroke="#D4607A" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M80 72 C90 65,110 55,132 48 C146 43,158 44,158 54 C158 62,146 68,130 70 C110 73,92 72,80 72Z" fill="rgba(212,96,122,0.12)" stroke="#D4607A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80 76 C92 78,114 82,136 78 C148 76,156 70,154 62" fill="none" stroke="#D4607A" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M74 68 C74 62,86 58,86 68 C86 78,74 82,74 76 Z" fill="rgba(212,96,122,0.35)" stroke="#D4607A" stroke-width="1.8"/>
+  <path d="M74 78 C70 94,60 118,48 148 C40 168,34 186,36 196" fill="none" stroke="#D4607A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M78 78 C74 94,64 118,52 148 C44 168,38 186,40 196" fill="none" stroke="#D4607A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M86 78 C90 94,100 118,112 148 C120 168,126 186,124 196" fill="none" stroke="#D4607A" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M82 78 C86 94,96 118,108 148 C116 168,122 186,120 196" fill="none" stroke="#D4607A" stroke-width="2.2" stroke-linecap="round"/>
+</svg>`;}
+
+function buildTOC(){
+  const g=document.getElementById('tocGrid');
+  chapters.forEach((ch,i)=>{
+    const ok=canRead(ch);
+    const el=document.createElement('div');
+    el.className='cc '+(ok?'ok':'locked');
+    el.innerHTML=`<div class="cc-top" style="background:${ch.col}"></div>
+      <div class="cc-body"><div class="cc-meta"><span class="cc-n">Chapter ${String(i+1).padStart(2,'0')}</span><span class="cc-t">${fmtH(ch.h)} IST</span></div>
+      <div class="cc-title">${ch.title}</div><div class="cc-deck">${ok?ch.deck:'🔒 Unlocks at '+fmtH(ch.h)+' IST · April 21'}</div></div>
+      <div class="cc-foot">${ok?'<span class="cc-read">Read now →</span>':'<span>Coming soon ✨</span>'}</div>`;
+    if(ok)el.addEventListener('click',()=>showCh(i));
+    g.appendChild(el);
+  });
+}
+function buildPages(){
+  const c=document.getElementById('chaptersContainer');
+  chapters.forEach((ch,i)=>{
+    const pg=document.createElement('div');pg.className='cpage';pg.id='pg'+i;
+    const pOk=i>0&&canRead(chapters[i-1]);const nOk=i<chapters.length-1&&canRead(chapters[i+1]);
+    pg.innerHTML=`<div class="cbar"><button class="cbar-back" onclick="showMain()">← All Chapters</button><span class="cbar-mid">Vol. 21 · Pushti 🎀</span><span class="cbar-n">Ch. ${String(i+1).padStart(2,'0')}</span></div>
+      <div class="ch"><div class="ch-meta"><span>Chapter ${String(i+1).padStart(2,'0')} · ${fmtH(ch.h)} IST · April 21, 2026</span><span>Vol. 21</span></div>
+      <div class="ch-bow-wrap">${bowHTML()}</div>
+      <div class="ch-hl">${ch.title}</div><div class="ch-dk">${ch.deck}</div>
+      <div class="ch-by">Curated by <span>Aash the Great, ofc obv 👑</span> · April 21, 2026</div></div>
+      <div class="cbody">${ch.body}</div>
+      <div class="cnav">${pOk?`<button class="cnav-btn" onclick="showCh(${i-1})">← Previous</button>`:'<span></span>'}<button class="cnav-btn" onclick="showMain()">All Chapters</button>${nOk?`<button class="cnav-btn next" onclick="showCh(${i+1})">Next →</button>`:'<span></span>'}</div>`;
+    c.appendChild(pg);
+  });
+}
+function showMain(){document.getElementById('mainView').style.display='block';document.querySelectorAll('.cpage').forEach(p=>p.classList.remove('active'));window.scrollTo(0,0);}
+function showCh(i){document.getElementById('mainView').style.display='none';document.querySelectorAll('.cpage').forEach(p=>p.classList.remove('active'));document.getElementById('pg'+i).classList.add('active');window.scrollTo(0,0);}
+function updateBar(){
+  const ist=getIST(),d=ist.getDate(),m=ist.getMonth()+1;
+  const n=chapters.filter(ch=>canRead(ch)).length;
+  if(m===4&&d===21)document.getElementById('statusBar').textContent=`🎀 Happy Birthday Pushti · Vol. 21 · ${n} of ${chapters.length} chapters unlocked · April 21, 2026`;
+  else if((m<4)||(m===4&&d<21))document.getElementById('statusBar').textContent=`Coming soon · April 21, 2026 · Curated by Aash the Great, ofc obv 👑 ✨`;
+  else document.getElementById('statusBar').textContent=`Vol. 21 · The Birthday Edition · All chapters unlocked 🎀`;
+}
+buildTOC();buildPages();updateBar();showMain();
+setInterval(()=>location.reload(),2*60*1000);
+</script>
+</body>
+</html>
